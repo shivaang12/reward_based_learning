@@ -77,57 +77,85 @@ threadFunction=function()
                             -- Ok, the drop position is valid
                             -- dropPos={dropPositions[j][intData[1]][intData[2]][1],dropPositions[j][intData[1]][intData[2]][2],dropPositions[j][intData[1]][intData[2]][3],dropPositions[j][intData[1]][intData[2]][4]/4+rotAngle/4}
                             -- rd = math.random(2)
-                            if (intData[2] == 1) then
-                                  if (rewardMatrix[1][1] >= rewardMatrix[1][2] ) then
-                                    if (rewardMatrix[1][1] >= rewardMatrix[1][3] ) then
-                                      dropPos={dropPositions[j][intData[1]][1][1],dropPositions[j][intData[1]][1][2],dropPositions[j][intData[1]][1][3],dropPositions[j][intData[1]][1][4]/4+rotAngle/4}
-                                      rewardMatrix[1][1] = rewardMatrix[1][1] + 10
-                                    else
-                                      dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                      rewardMatrix[1][3] = rewardMatrix[1][3] - 10
-                                    end
-                                  elseif (rewardMatrix[1][2] >= rewardMatrix[1][3]) then
-                                    dropPos={dropPositions[j][intData[1]][2][1],dropPositions[j][intData[1]][2][2],dropPositions[j][intData[1]][2][3],dropPositions[j][intData[1]][2][4]/4+rotAngle/4}
-                                    rewardMatrix[1][2] = rewardMatrix[1][2] - 10
+                            if ((math.random() > EPLISON) and (cou <= 100)) or ((qMatrix[intData[2]][1]) == 0 and (qMatrix[intData[2]][3]) == 0 and (qMatrix[intData[2]][3])) then
+                              randd = math.random(1,3)
+                              if(randd == 1) then
+                                dropPos={dropPositions[j][intData[1]][1][1],dropPositions[j][intData[1]][1][2],dropPositions[j][intData[1]][1][3],dropPositions[j][intData[1]][1][4]/4+rotAngle/4}
+                                if (intData[2] == 1) then
+                                  rewardValue = 1
+                                else
+                                  rewardValue = 0
+                                end
+                              end
+                              if(randd == 2) then
+                                dropPos={dropPositions[j][intData[1]][2][1],dropPositions[j][intData[1]][2][2],dropPositions[j][intData[1]][2][3],dropPositions[j][intData[1]][2][4]/4+rotAngle/4}
+                                if (intData[2] == 2) then
+                                  rewardValue = 1
+                                else
+                                  rewardValue = 0
+                                end
+                              end
+                              if(randd == 3) then
+                                dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
+                                if (intData[2] == 3) then
+                                  rewardValue = 1
+                                else
+                                  rewardValue = 0
+                                end
+                              end
+                            else
+                              if (qMatrix[intData[2]][1] >= qMatrix[intData[2]][2] ) then
+                                if (qMatrix[intData[2]][1] >= qMatrix[intData[2]][3] ) then
+                                  dropPos={dropPositions[j][intData[1]][1][1],dropPositions[j][intData[1]][1][2],dropPositions[j][intData[1]][1][3],dropPositions[j][intData[1]][1][4]/4+rotAngle/4}
+                                  randd = 1
+                                  if (intData[2] == 1) then
+                                    rewardValue = 1
                                   else
-                                    dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                    rewardMatrix[1][3] = rewardMatrix[1][3] - 10
-                                    end
-                            end
-                            if (intData[2] == 2) then
-                                  if (rewardMatrix[2][1] >= rewardMatrix[2][2] ) then
-                                    if (rewardMatrix[2][1] >= rewardMatrix[2][3] ) then
-                                      dropPos={dropPositions[j][intData[1]][1][1],dropPositions[j][intData[1]][1][2],dropPositions[j][intData[1]][1][3],dropPositions[j][intData[1]][1][4]/4+rotAngle/4}
-                                      rewardMatrix[2][1] = rewardMatrix[2][1] - 10
-                                    else
-                                      dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                      rewardMatrix[2][3] = rewardMatrix[2][3] - 10
-                                    end
-                                  elseif (rewardMatrix[2][2] >= rewardMatrix[2][3]) then
-                                    dropPos={dropPositions[j][intData[1]][2][1],dropPositions[j][intData[1]][2][2],dropPositions[j][intData[1]][2][3],dropPositions[j][intData[1]][2][4]/4+rotAngle/4}
-                                    rewardMatrix[2][2] = rewardMatrix[2][2] + 10
+                                    rewardValue = 0
+                                  end
+                                  --rewardMatrix[1][1] = rewardMatrix[1][1] + 10
+                                else
+                                  dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
+                                  randd = 3
+                                  if (intData[2] == 3) then
+                                    rewardValue = 1
                                   else
-                                    dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                    rewardMatrix[2][3] = rewardMatrix[2][3] - 10
-                                    end
-                            end
-                            if (intData[2] == 3) then
-                                  if (rewardMatrix[3][1] >= rewardMatrix[3][2] ) then
-                                    if (rewardMatrix[3][1] >= rewardMatrix[3][3] ) then
-                                      dropPos={dropPositions[j][intData[1]][1][1],dropPositions[j][intData[1]][1][2],dropPositions[j][intData[1]][1][3],dropPositions[j][intData[1]][1][4]/4+rotAngle/4}
-                                      rewardMatrix[3][1] = rewardMatrix[3][1] - 10
-                                    else
-                                      dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                      rewardMatrix[3][3] = rewardMatrix[3][3] + 10
-                                    end
-                                  elseif (rewardMatrix[3][2] >= rewardMatrix[3][3]) then
-                                    dropPos={dropPositions[j][intData[1]][2][1],dropPositions[j][intData[1]][2][2],dropPositions[j][intData[1]][2][3],dropPositions[j][intData[1]][2][4]/4+rotAngle/4}
-                                    rewardMatrix[3][2] = rewardMatrix[3][2] - 10
-                                  else
-                                    dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
-                                    rewardMatrix[3][3] = rewardMatrix[3][3] + 10
-                                    end
-                            end
+                                    rewardValue = 0
+                                  end
+                                  --rewardMatrix[1][3] = rewardMatrix[1][3] - 10
+                                end
+                              elseif (qMatrix[intData[2]][2] >= qMatrix[intData[2]][3]) then
+                                dropPos={dropPositions[j][intData[1]][2][1],dropPositions[j][intData[1]][2][2],dropPositions[j][intData[1]][2][3],dropPositions[j][intData[1]][2][4]/4+rotAngle/4}
+                                randd = 2
+                                if (intData[2] == 2) then
+                                  rewardValue = 1
+                                else
+                                  rewardValue = 0
+                                end
+                                --rewardMatrix[1][2] = rewardMatrix[1][2] - 10
+                              else
+                                dropPos={dropPositions[j][intData[1]][3][1],dropPositions[j][intData[1]][3][2],dropPositions[j][intData[1]][3][3],dropPositions[j][intData[1]][3][4]/4+rotAngle/4}
+                                randd = 3
+                                if (intData[2] == 3) then
+                                  rewardValue = 1
+                                else
+                                  rewardValue = 0
+                                end
+                                --rewardMatrix[1][3] = rewardMatrix[1][3] - 10
+                                end
+                              end
+                              q_predict = qMatrix[intData[2]][randd]
+                              q_target = rewardValue
+                              temmp =  ALPHA * (q_target - q_predict)
+                              qMatrix[intData[2]][randd] = qMatrix[intData[2]][randd] + temmp
+                              cou = cou + 1
+                              print ("interation", cou)
+                              for i=1,3,1 do
+                                  print (qMatrix[i][1], qMatrix[i][2],qMatrix[i][3])
+                              end
+                              print (" ")
+
+
                             -- First store an updated shape info (where we removed the info of the shape we are going to pick up):
                             simSetStringSignal('shapeInfos',newInfo)
                             simSetThreadAutomaticSwitch(true) -- Now we can allow for thread switches too since we updated the 'shapeInfos' signal
@@ -201,6 +229,11 @@ simSetThreadSwitchTiming(2) -- Default timing for automatic thread switching
 
 simWait(2)
 
+-- SOME VARIABLES FOR Q LEARNING
+EPLISON = 0.9
+ALPHA = 0.1
+GAMMA = 0.9
+cou = 0
 -- Retrieve some values:
 mainIkTask=simGetIkGroupHandle('irb360_mainTask')
 ikModeTipDummy=simGetObjectHandle('irb360_ikTip')
@@ -262,10 +295,18 @@ for i=1,2,1 do
     end
 end
 rewardMatrix={{nil,nil,nil}},{{nil,nil,nil}},{{nil,nil,nil}}
+qMatrix={{nil,nil,nil}},{{nil,nil,nil}},{{nil,nil,nil}}
 rewardMatrix={{{},{},{}},{{},{},{}},{{},{},{}}}
+qMatrix={{{},{},{}},{{},{},{}},{{},{},{}}}
 for i=1,3,1 do
     for j=1,3,1 do
       rewardMatrix[i][j] = 0
+    end
+end
+
+for i=1,3,1 do
+    for j=1,3,1 do
+      qMatrix[i][j] = 0
     end
 end
 
